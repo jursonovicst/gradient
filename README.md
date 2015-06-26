@@ -10,3 +10,5 @@ As the source of the video file I used the following 16-bit source image. There 
 (if you view this image on your computer, your display probably will not show a difference due to the lack of 10-bit color depth support...)
 
 Looping and encoding this image with hevc in yuv420p10le color space results the following UHD mp4 file: [gradient.mp4](https://github.com/jursonovicst/gradient/blob/master/gradient.mp4). If you play this file on a 10-bit UHD display then 10-bit gradients should be very smooth in contrast with 8-bit ones, where 15 pixel wide vertical bars should appear.
+
+You can download an open source hevc encoder from here: (http://x265.org), make sure, that you build it with HIGH_BIT_DEPTH enabled in cmake to support  10-bit mode.
