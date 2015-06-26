@@ -13,6 +13,7 @@
 #Check ffmpeg and ImageMagic
 hash convert 2>/dev/null || { echo >&2 "This script requires ImageMagic but it's not installed.  Aborting."; exit 1; }
 hash ffmpeg 2>/dev/null || { echo >&2 "This script requires ffmpeg but it's not installed.  Aborting."; exit 1; }
+hash x265 2>/dev/null || { echo >&2 "This script requires x256 but it's not installed. You can download it from http://x265.org  Aborting."; exit 1; }
 
 #Check TMPDIR
 if [ ! -d "$TMPDIR" ]; then
@@ -81,8 +82,8 @@ if [ ! -f $TMPDIR/gradient.y4m ]; then
 fi
 
 
-#encode and package the raw video with 10 bit color space support
-if [ ! -f gradient-sample.mp4 ]; then
-  ffmpeg -i $TMPDIR/gradient.y4m -an -vf scale=256:144 -pix_fmt yuv420p gradient-sample.mp4
+#encode the raw video with x265 10-bit support...
+if [ ! -f gradient.mp4 ]; then
+   x265...
 fi
 
