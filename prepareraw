@@ -1,0 +1,88 @@
+#!/bin/sh
+
+
+##############################################
+#
+# This script creates a 16bit png test image,
+# and converts it to an UHD test video to
+# test the color depth support of UHD TV sets.
+#
+##############################################
+
+
+#Check ffmpeg and ImageMagic
+hash convert 2>/dev/null || { echo >&2 "This script requires ImageMagic but it's not installed.  Aborting."; exit 1; }
+hash ffmpeg 2>/dev/null || { echo >&2 "This script requires ffmpeg but it's not installed.  Aborting."; exit 1; }
+
+#Check TMPDIR
+if [ ! -d "$TMPDIR" ]; then
+  TMPDIR="./"
+fi
+
+
+if [ ! -f gradient.png ]; then
+
+  #Calculate ruller positions to mark color borders
+  for i in $(seq 0 15 3840); do
+    grid15="${grid15}line $i,0 $i,10  "
+  done
+  
+  for i in $(seq 0 3.75 3840); do 
+    grid375="${grid375}line $i,0 $i,10 "
+  done
+  
+  for i in $(seq 0 60 3840); do
+    grid60="${grid60}line $i,0 $i,10  "
+  done
+
+  #Create individual pngs for 8 and 16 bit color bars
+  convert -depth 16 -size 270x3840 gradient:"rgb(0%,0%,100%)-rgb(100%,100%,100%)" -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid375" \
+  -pointsize 36 -gravity West -annotate +0+0 '10bit rgb(0%,0%,100%)-rgb(100%,100%,100%) gradient (you should see 1024 vertical bars, if your display supports 10-bit color depth)' \
+  -pointsize 60 -gravity North -annotate +0+0 '10-bit UHD Test Sequence' \
+  $TMPDIR/gd16.png
+
+  convert -depth 8 -size  270x3840 gradient:"rgb(0%,0%,100%)-rgb(100%,100%,100%)" -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid15"  \
+  -pointsize 36 -gravity West -annotate +0+0 '8bit gradient (you should see 256 vertical bars)' \
+  $TMPDIR/gd8.png
+
+  convert -depth 16 -size 270x3840 gradient:"rgb(100%,0%,0%)-rgb(100%,100%,100%)" -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid375" \
+  -pointsize 36 -gravity West -annotate +0+0 '10bit rgb(100%,0%,0%)-rgb(100%,100%,100%) gradient' \
+  $TMPDIR/gc16.png
+
+  convert -depth 8 -size  270x3840 gradient:"rgb(100%,0%,0%)-rgb(100%,100%,100%)" -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid15"  \
+  -pointsize 36 -gravity West -annotate +0+0 '8bit gradient' \
+  $TMPDIR/gc8.png
+
+  convert -depth 16 -size 270x3840 gradient:"rgb(0%,0%,0%)-rgb(100%,100%,100%)"   -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid375" \
+  -pointsize 36 -gravity West -annotate +0+0 '10bit rgb(0%,0%,0%)-rgb(100%,100%,100%) gradient' \
+  $TMPDIR/gb16.png
+
+  convert -depth 8 -size  270x3840 gradient:"rgb(0%,0%,0%)-rgb(100%,100%,100%)"   -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid15"  \
+  -pointsize 36 -gravity West -annotate +0+0 '8bit gradient' \
+  $TMPDIR/gb8.png
+
+  convert -depth 16 -size 270x3840 gradient:"rgb(50%,50%,50%)-rgb(75%,75%,75%)" -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid15" -annotate +0+0 '10bit' \
+  -pointsize 36 -gravity West -annotate +0+0 '10bit rgb(50%,50%,50%)-rgb(75%,75%,75%) gradient' \
+  $TMPDIR/ga16.png
+
+  convert -depth 8 -size  270x3840 gradient:"rgb(50%,50%,50%)-rgb(75%,75%,75%)" -rotate 90 -draw 'line 0,269 3840,269' -draw "$grid60" \
+  -pointsize 36 -gravity SouthEast -annotate +0+0 'http://jursonovics.com - This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.' \
+  -pointsize 36 -gravity West -annotate +0+0 '8bit gradient' \
+  $TMPDIR/ga8.png
+
+  #Create test png by appending color bars
+  convert -depth 16 -append $TMPDIR/gd16.png $TMPDIR/gd8.png $TMPDIR/gc16.png $TMPDIR/gc8.png $TMPDIR/gb16.png $TMPDIR/gb8.png $TMPDIR/ga16.png $TMPDIR/ga8.png gradient.png
+fi
+
+
+#convert png into a raw video file
+if [ ! -f $TMPDIR/gradient.y4m ]; then
+   ffmpeg -loop 1 -t 10 -r 50 -i gradient.png -r 50 -strict -1 -pix_fmt yuv420p10 $TMPDIR/gradient.y4m
+fi
+
+
+#encode and package the raw video with 10 bit color space support
+if [ ! -f gradient-sample.mp4 ]; then
+  ffmpeg -i $TMPDIR/gradient.y4m -an -vf scale=256:144 -pix_fmt yuv420p gradient-sample.mp4
+fi
+
