@@ -5,7 +5,7 @@ I had always trouble finding good test sequences for verifying 10-bit support of
 
 As the source of the video file I used the following 16-bit source image. There are four with 8-bit and other four with 16 bit blue/red/gray gradient.
 
-![gradient](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![gradient](https://raw.githubusercontent.com/jursonovicst/gradient/master/gradient.png "16-bit Gradient")
 
 (if you view this image on your computer, your display probably will not show a difference due to the lack of 10-bit color depth support...)
 
