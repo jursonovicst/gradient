@@ -14,6 +14,7 @@
 hash convert 2>/dev/null || { echo >&2 "This script requires ImageMagic but it's not installed.  Aborting."; exit 1; }
 hash ffmpeg 2>/dev/null || { echo >&2 "This script requires ffmpeg but it's not installed.  Aborting."; exit 1; }
 hash x265 2>/dev/null || { echo >&2 "This script requires x256 but it's not installed. You can download it from http://x265.org  Aborting."; exit 1; }
+hash MP4Box 2>/dev/null || { echo >&2 "This script requires GPAC but it's not installed. Aborting."; exit 1; }
 
 #Check TMPDIR
 if [ ! -d "$TMPDIR" ]; then
@@ -78,12 +79,13 @@ fi
 
 #convert png into a raw video file
 if [ ! -f $TMPDIR/gradient.y4m ]; then
-   ffmpeg -loop 1 -t 10 -r 50 -i gradient.png -r 50 -strict -1 -pix_fmt yuv420p10 $TMPDIR/gradient.y4m
+  ffmpeg -loop 1 -t 10 -r 50 -i gradient.png -r 50 -strict -1 -pix_fmt yuv420p10 $TMPDIR/gradient.y4m
 fi
 
 
-#encode the raw video with x265 10-bit support...
+#encode and package the raw video with x265 10-bit support...
 if [ ! -f gradient.mp4 ]; then
-   x265...
+  x265 --output $TMPDIR/gradient.265 $TMPDIR/gradient.y4m
+  MP4Box -add $TMPDIR/gradient.y4m gradient.mp4
 fi
 
