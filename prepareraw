@@ -89,7 +89,7 @@ else
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
   done
-  command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '8bit red gradient (you should see 256 vertical bars)' "
+  command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '8bit green gradient (you should see 256 vertical bars)' "
   command=$command"gradient.png"
   eval  $command
 
@@ -104,7 +104,7 @@ else
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" "
   done
-  command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit red gradient (you should see 1024 vertical bars, if your display supports 10-bit color depth)' "
+  command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit green gradient (you should see 1024 vertical bars, if your display supports 10-bit color depth)' "
   command=$command"gradient.png"
   eval  $command
 
@@ -221,7 +221,7 @@ else
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
   done
-  command=$command"-fill \"#ffffffffffff\" -pointsize 36 -annotate +50+$(($y1 + 110)) '8bit gray gradient (you should see 64 vertical bars)' "
+  command=$command"-fill \"#ffffffffffff\" -pointsize 36 -annotate +50+$(($y1 + 110)) '8bit gray50%-gray75% gradient (you should see 64 vertical bars)' "
   command=$command"gradient.png"
   eval  $command
 
@@ -237,7 +237,7 @@ else
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" "
   done
-  command=$command"-fill \"#ffffffffffff\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit gray gradient (you should see 256 vertical bars, if your display supports 10-bit color depth)' "
+  command=$command"-fill \"#ffffffffffff\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit gray50%-gray75% gradient (you should see 256 vertical bars, if your display supports 10-bit color depth)' "
   command=$command"gradient.png"
   eval  $command
 
@@ -256,7 +256,7 @@ else
 
 
 
-  convert gradient.png -fill "#ffffffffffff" -pointsize 36 -gravity SouthEast -annotate +0+30 'gradient v1.1 - http://jursonovics.com - This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.' gradient.png
+  convert gradient.png -fill "#ffffffffffff" -pointsize 16 -gravity SouthEast -annotate +0+30 'gradient v1.1 - http://jursonovics.com - This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.' gradient.png
 
 fi
 
