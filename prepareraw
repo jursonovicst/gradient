@@ -29,16 +29,19 @@ if [ -f gradient.png ]; then
   echo "skip gradient creation, gradient.png file does exist"
 
 else
+  echo "creating empty canvas"
   convert -depth 16 -size 3840x2160 xc:white gradient.png
 
-  # blue 8 bit gradient
+  height=216
+
+  echo "creating blue 8 bit gradient"
   command="convert gradient.png "
   for i in $(seq 0 255); do
     color=$(printf "#%04x%04xffff" $(($i * 256)) $(($i * 256)) )
     x1=$(($i * 15))
-    y1=$((270 * 0 + 3))
+    y1=$(($height * 0 + 3))
     x2=$(($x1 + 14))
-    y2=$((270 * 1 - 1))
+    y2=$(($height * 1 - 1))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
   done
@@ -46,14 +49,14 @@ else
   command=$command"gradient.png"
   eval  $command
 
-  # blue 10 bit gradient
+  echo "creating blue 10 bit gradient"
   command="convert gradient.png "
   for i in $(seq 0 1023); do
     color=$(printf "#%04x%04xffff" $(($i * 64)) $(($i * 64)) )
     x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
-    y1=$((270 * 1 + 1))
+    y1=$(($height * 1 + 1))
     x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
-    y2=$((270 * 2 - 3))
+    y2=$(($height * 2 - 3))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" "
   done
@@ -63,11 +66,10 @@ else
 
   command="convert gradient.png "
   for i in $(seq 0 1023); do
-    color=$(printf "#%04x%04xffff" $(($i * 64)) $(($i * 64)) )
     x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
-    y1=$((270 * 1 + 1))
+    y1=$(($height * 1 + 1))
     x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
-    y2=$((270 * 2 - 3))
+    y2=$(($height * 2 - 3))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"#000000\" -draw \"line $x2,$y2 $x2,$(($y2 - 10))\" "
   done
@@ -76,14 +78,14 @@ else
 
 
 
-  # red 8 bit gradient
+  echo "creating green 8 bit gradient"
   command="convert gradient.png "
   for i in $(seq 0 255); do
-    color=$(printf "#ffff%04x%04x" $(($i * 256)) $(($i * 256)) )
+    color=$(printf "#%04xffff%04x" $(($i * 256)) $(($i * 256)) )
     x1=$(($i * 15))
-    y1=$((270 * 2 + 3))
+    y1=$(($height * 2 + 3))
     x2=$(($x1 + 14))
-    y2=$((270 * 3 - 1))
+    y2=$(($height * 3 - 1))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
   done
@@ -91,14 +93,14 @@ else
   command=$command"gradient.png"
   eval  $command
 
-  # red 10 bit gradient
+  echo "creating green 10 bit gradient"
   command="convert gradient.png "
   for i in $(seq 0 1023); do
-    color=$(printf "#ffff%04x%04x" $(($i * 64)) $(($i * 64)) )
+    color=$(printf "#%04xffff%04x" $(($i * 64)) $(($i * 64)) )
     x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
-    y1=$((270 * 3 + 1))
+    y1=$(($height * 3 + 1))
     x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
-    y2=$((270 * 4 - 3))
+    y2=$(($height * 4 - 3))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" "
   done
@@ -108,11 +110,53 @@ else
 
   command="convert gradient.png "
   for i in $(seq 0 1023); do
+    x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
+    y1=$(($height * 3 + 1))
+    x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
+    y2=$(($height * 4 - 3))
+    #echo $color $x1 $y1 $x2 $y2
+    command=$command"-fill \"#000000\" -draw \"line $x2,$y2 $x2,$(($y2 - 10))\" "
+  done
+  command=$command"gradient.png"
+  eval  $command
+
+
+  echo "creating red 8 bit gradient"
+  command="convert gradient.png "
+  for i in $(seq 0 255); do
+    color=$(printf "#ffff%04x%04x" $(($i * 256)) $(($i * 256)) )
+    x1=$(($i * 15))
+    y1=$(($height * 4 + 3))
+    x2=$(($x1 + 14))
+    y2=$(($height * 5 - 1))
+    #echo $color $x1 $y1 $x2 $y2
+    command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
+  done
+  command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '8bit red gradient (you should see 256 vertical bars)' "
+  command=$command"gradient.png"
+  eval  $command
+
+  echo "creating red 10 bit gradient"
+  command="convert gradient.png "
+  for i in $(seq 0 1023); do
     color=$(printf "#ffff%04x%04x" $(($i * 64)) $(($i * 64)) )
     x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
-    y1=$((270 * 3 + 1))
+    y1=$(($height * 5 + 1))
     x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
-    y2=$((270 * 4 - 3))
+    y2=$(($height * 6 - 3))
+    #echo $color $x1 $y1 $x2 $y2
+    command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" "
+  done
+  command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit red gradient (you should see 1024 vertical bars, if your display supports 10-bit color depth)' "
+  command=$command"gradient.png"
+  eval  $command
+
+  command="convert gradient.png "
+  for i in $(seq 0 1023); do
+    x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
+    y1=$(($height * 5 + 1))
+    x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
+    y2=$(($height * 6 - 3))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"#000000\" -draw \"line $x2,$y2 $x2,$(($y2 - 10))\" "
   done
@@ -121,14 +165,14 @@ else
 
 
 
-  # gray 8 bit gradient
+  echo "creating gray 8 bit gradient"
   command="convert gradient.png "
   for i in $(seq 0 255); do
     color=$(printf "#%04x%04x%04x" $(($i * 256)) $(($i * 256)) $(($i * 256)) )
     x1=$(($i * 15))
-    y1=$((270 * 4 + 3))
+    y1=$(($height * 6 + 3))
     x2=$(($x1 + 14))
-    y2=$((270 * 5 - 1))
+    y2=$(($height * 7 - 1))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
   done
@@ -136,14 +180,14 @@ else
   command=$command"gradient.png"
   eval  $command
 
-  # gray 10 bit gradient
+  echo "creating gray 10 bit gradient"
   command="convert gradient.png "
   for i in $(seq 0 1023); do
     color=$(printf "#%04x%04x%04x" $(($i * 64)) $(($i * 64)) $(($i * 64)) )
     x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
-    y1=$((270 * 5 + 1))
+    y1=$(($height * 7 + 1))
     x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
-    y2=$((270 * 6 - 3))
+    y2=$(($height * 8 - 3))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" "
   done
@@ -153,11 +197,10 @@ else
 
   command="convert gradient.png "
   for i in $(seq 0 1023); do
-    color=$(printf "#%04x%04x%04x" $(($i * 64)) $(($i * 64)) $(($i * 64)) )
     x1=$(printf "%.0f" $(echo "$i * 3.75" |bc))
-    y1=$((270 * 5 + 1))
+    y1=$(($height * 7 + 1))
     x2=$(printf "%.0f" $(echo "($i + 1) * 3.75 - 0.999999" |bc))
-    y2=$((270 * 6 - 3))
+    y2=$(($height * 8 - 3))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"#000000\" -draw \"line $x2,$y2 $x2,$(($y2 - 10))\" "
   done
@@ -166,15 +209,15 @@ else
 
 
 
-  # gray 8 bit gradient
+  echo "creating gray 8 bit gradient"
   command="convert gradient.png "
   for j in $(seq 128 191); do
     color=$(printf "#%04x%04x%04x" $(($j * 256)) $(($j * 256)) $(($j * 256)) )
     i=$(($j - 128))
     x1=$(($i * 60))
-    y1=$((270 * 6 + 3))
+    y1=$(($height * 8 + 3))
     x2=$(($x1 + 59))
-    y2=$((270 * 7 - 1))
+    y2=$(($height * 9 - 1))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
   done
@@ -182,16 +225,16 @@ else
   command=$command"gradient.png"
   eval  $command
 
-  # gray 10 bit gradient
+  echo "creating gray 10 bit gradient"
   command="convert gradient.png "
   for j in $(seq 512 767); do
     color=$(printf "#%04x%04x%04x" $(($j * 64)) $(($j * 64)) $(($j * 64)) )
     i=$(($j - 512))
     x1=$(($i * 15))
-    y1=$((270 * 7 + 1))
+    y1=$(($height * 9 + 1))
     x2=$(($x1 + 14))
-    y2=$((270 * 8 - 3))
-    echo $color $x1 $y1 $x2 $y2
+    y2=$(($height * 10 - 3))
+    #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" "
   done
   command=$command"-fill \"#ffffffffffff\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit gray gradient (you should see 256 vertical bars, if your display supports 10-bit color depth)' "
@@ -200,12 +243,11 @@ else
 
   command="convert gradient.png "
   for j in $(seq 512 767); do
-    color=$(printf "#%04x%04x%04x" $(($j * 64)) $(($j * 64)) $(($j * 64)) )
     i=$(($j - 512))
     x1=$(($i * 15))
-    y1=$((270 * 7 + 1))
+    y1=$(($height * 9 + 1))
     x2=$(($x1 + 14))
-    y2=$((270 * 8 - 3))
+    y2=$(($height * 10 - 3))
     #echo $color $x1 $y1 $x2 $y2
     command=$command"-fill \"#000000\" -draw \"line $x2,$y2 $x2,$(($y2 - 10))\" "
   done
@@ -214,7 +256,7 @@ else
 
 
 
-  convert gradient.png -fill "#ffffffffffff" -pointsize 36 -gravity SouthEast -annotate +0-30 'http://jursonovics.com - This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.' gradient.png
+  convert gradient.png -fill "#ffffffffffff" -pointsize 36 -gravity SouthEast -annotate +0+30 'gradient v1.1 - http://jursonovics.com - This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.' gradient.png
 
 fi
 
@@ -222,10 +264,10 @@ fi
 # encode and package video with x265 10-bit support...
 if [ ! -f gradient.mp4 ]; then
 
-  # convert png into a raw video file
-  ffmpeg -y -loop 1 -t 10 -r 50 -i gradient.png -r 50 -strict -1 -pix_fmt yuv420p10 $TMPDIR/gradient.y4m
+  echo "converting png to h265 raw video file"
+  ffmpeg -y -loop 1 -t 10 -framerate 50 -i gradient.png -f yuv4mpegpipe -pix_fmt yuv420p10 -strict -1 - | x265 --y4m --bitrate 3000 -o $TMPDIR/gradient.265 -
 
-  x265 --output $TMPDIR/gradient.265 $TMPDIR/gradient.y4m
+  echo "packaging h265 file"
   MP4Box -add $TMPDIR/gradient.265 gradient.mp4
 fi
 
