@@ -13,8 +13,9 @@
 # check dependencies
 hash convert 2>/dev/null || { echo >&2 "This script requires ImageMagic but it's not installed.  Aborting."; exit 1; }
 hash ffmpeg 2>/dev/null || { echo >&2 "This script requires ffmpeg but it's not installed.  Aborting."; exit 1; }
+ffmpeg -pix_fmts 2>&1 |grep yuv420p10 >/dev/null || { echo >&2 "It seems to me, that ffmpeg was not built with 10bit support.  Aborting."; exit 1; }
 hash x265 2>/dev/null || { echo >&2 "This script requires x256 but it's not installed. You can download it from http://x265.org. Please make sure, you build it with 10bit support! Aborting."; exit 1; }
-x265 --version 2>&1 |grep "build" |grep 10bit >/dev/null || { echo >&2 "It seems to me, that x265 was not built with 10 bit support! Aborting."; exit 1; }
+x265 --version 2>&1 |grep "build" |grep 10bit >/dev/null || { echo >&2 "It seems to me, that x265 was not built with 10bit support! Aborting. (see https://bitbucket.org/multicoreware/x265/wiki/Home)"; exit 1; }
 hash MP4Box 2>/dev/null || { echo >&2 "This script requires GPAC but it's not installed. Aborting."; exit 1; }
 
 # check TMPDIR
@@ -225,6 +226,6 @@ if [ ! -f gradient.mp4 ]; then
   ffmpeg -y -loop 1 -t 10 -r 50 -i gradient.png -r 50 -strict -1 -pix_fmt yuv420p10 $TMPDIR/gradient.y4m
 
   x265 --output $TMPDIR/gradient.265 $TMPDIR/gradient.y4m
-  MP4Box -add $TMPDIR/gradient.y4m gradient.mp4
+  MP4Box -add $TMPDIR/gradient.265 gradient.mp4
 fi
 
