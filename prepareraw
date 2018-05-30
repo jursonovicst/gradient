@@ -9,17 +9,24 @@
 #
 ##############################################
 
-
-x265="./x26510bit"
+# command specifications
+x265="x265"
 x264="x264"
 
 # check dependencies
 hash convert 2>/dev/null || { echo >&2 "This script requires ImageMagic but it's not installed.  Aborting."; exit 1; }
+
 hash ffmpeg 2>/dev/null || { echo >&2 "This script requires ffmpeg but it's not installed.  Aborting."; exit 1; }
 ffmpeg -pix_fmts 2>&1 |grep yuv444p10 >/dev/null || { echo >&2 "It seems to me, that ffmpeg was not built with 10bit support.  Aborting."; exit 1; }
+
 hash $x265 2>/dev/null || { echo >&2 "This script requires x256 but it's not installed. You can download it from http://x265.org. Please make sure, you build it with 10bit support! Aborting."; exit 1; }
 $x265 --version 2>&1 |grep "build" |grep 10bit >/dev/null || { echo >&2 "It seems to me, that x265 was not built with 10bit support! Aborting. (see https://bitbucket.org/multicoreware/x265/wiki/Home)"; exit 1; }
+
+hash $x264 2>/dev/null || { echo >&2 "This script requires x254 but it's not installed. Please make sure, you build it with 10bit support! Aborting."; exit 1; }
+$x264 --version 2>&1 |grep "bit-depth=10" >/dev/null || { echo >&2 "It seems to me, that x264 was not built with 10bit support (--bit-depth=10)! Aborting."; exit 1; }
+
 hash MP4Box 2>/dev/null || { echo >&2 "This script requires GPAC but it's not installed. Aborting."; exit 1; }
+
 
 # check TMPDIR
 if [ ! -d "$TMPDIR" ]; then
