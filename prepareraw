@@ -288,7 +288,7 @@ if [ ! -f gradient_x264.mp4 ]; then
   ffmpeg -y -loop 1 -t 10 -framerate 5 -i gradient.png -f yuv4mpegpipe -pix_fmt yuv420p10 -strict -1 - | $x264 --preset veryslow --bitrate 10000 -o $TMPDIR/gradient.264 dev/stdin
 
   echo "packaging h264 file"
-  MP4Box -add $TMPDIR/gradient.265 gradient_x264.mp4
+  MP4Box -add $TMPDIR/gradient.264 gradient_x264.mp4
 fi
 
 
