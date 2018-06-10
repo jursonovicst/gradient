@@ -293,7 +293,7 @@ if [ -f gradient_x264.mp4 ]; then
 else
 
   echo "converting png to h264 and packaging video file"
-  ffmpeg -y -loop 1 -t 10 -framerate 5 -i gradient.png -c:v libx264 -preset veryslow -b:v 10000 -f mp4 gradient_x264.mp4
+  ffmpeg -y -loop 1 -t 10 -framerate 5 -i gradient.png -c:v libx264 -pix_fmt yuv420p10 -preset veryslow -b:v 10000000 -f mp4 gradient_x264.mp4
 fi
 
 
