@@ -18,4 +18,4 @@ I used ImageMagick to create the following 16-bit, 3840×2160 (UHD) png image wi
 
 Looping and encoding this png file with ffmpeg, x265, and x264 in yuv420p10le color space resulted raw h265 and h264 files, which were put into mp4 container by GPAC.
 
-If you want to recreate or modify this image, make sure, that you build x265 with HIGH_BIT_DEPTH enabled in cmake to support  10-bit mode.
+If you want to recreate or modify these files, make sure, that you build x265 with HIGH_BIT_DEPTH enabled in cmake to support  10-bit mode.
