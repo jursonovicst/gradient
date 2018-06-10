@@ -10,7 +10,7 @@
 ##############################################
 
 # command specifications
-x265="x265"
+x265="./x26510bit"
 x264="x264"
 
 # check dependencies
@@ -272,7 +272,11 @@ fi
 
 
 # encode and package video with x265 10-bit support...
-if [ ! -f gradient.mp4 ]; then
+if [ -f gradient.mp4 ]; then
+
+  echo "skip x265 encoding, gradient.mp4 file does exist"
+
+else
 
   echo "converting png to h265 raw video file"
   ffmpeg -y -loop 1 -t 10 -framerate 5 -i gradient.png -f yuv4mpegpipe -pix_fmt yuv420p10 -strict -1 - | $x265 --y4m --preset veryslow --bitrate 10000 -o $TMPDIR/gradient.265 -
@@ -282,7 +286,11 @@ if [ ! -f gradient.mp4 ]; then
 fi
 
 # encode and package video with x264 10-bit support...
-if [ ! -f gradient_x264.mp4 ]; then
+if [ -f gradient_x264.mp4 ]; then
+
+  echo "skip x264 encoding, gradient_x264.mp4 file does exist"
+
+else
 
   echo "converting png to h264 raw video file"
   ffmpeg -y -loop 1 -t 10 -framerate 5 -i gradient.png -f yuv4mpegpipe -pix_fmt yuv420p10 -strict -1 - | $x264 --preset veryslow --bitrate 10000 -o $TMPDIR/gradient.264 dev/stdin
