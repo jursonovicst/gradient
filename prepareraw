@@ -90,7 +90,7 @@ else
     echo "creating ${COLORNAME[$gradnum]} 8 bit gradient"
     command="convert -depth 16 $filename.png "
     for i in $(seq 0 $(($gradbarnum8 - 1))); do
-      color1ch=$(( (256 * $gradfrom / 100 + $i ) * 256))
+      color1ch=$((256 * 256 * $gradfrom / 100 + 256 * $i))
       color=$(printf ${COLORMASK[$gradnum]} $color1ch $color1ch )
       x1=$(($i * gradbarwidth8))
       y1=$(($gradheight * $gradnum + 3))
@@ -106,7 +106,7 @@ else
     echo "creating ${COLORNAME[$gradnum]} 10 bit gradient"
     command="convert -depth 16 $filename.png "
     for i in $(seq 0 $(($gradbarnum10 - 1))); do
-      color1ch=$(( (1024 * $gradfrom / 100 + $i ) * 64))
+      color1ch=$((256 * 256 * $gradfrom / 100 + 64 * $i))
       color=$(printf ${COLORMASK[$gradnum]} $color1ch $color1ch )
       x1=$(($i * gradbarwidth10))
       y1=$(($gradheight * ( $gradnum + 1 ) + 1))
