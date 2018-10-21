@@ -174,16 +174,16 @@ else
 fi
 
 # encode and package video with x264 10-bit support...
-if [ -f ${filename}_x264.mp4 ]; then
-
-  echo "skip x264 encoding, ${filename}_x264.mp4 file does exist"
-
-else
-
-  echo "converting png to h264 and packaging video file"
-  $ffmpeg -y -loop 1 -t 10 -framerate 5 -i $filename.png -f mp4 -c:v libx264 -crf 0 -pix_fmt yuv420p10 -preset veryslow -movflags faststart ${filename}_yuv420p10_x264.mp4
-  $ffmpeg -y -loop 1 -t 10 -framerate 5 -i $filename.png -f mp4 -c:v libx264 -crf 0 -pix_fmt yuv444p10 -preset veryslow -movflags faststart ${filename}_yuv444p10_x264.mp4
-fi
+#if [ -f ${filename}_x264.mp4 ]; then
+#
+#  echo "skip x264 encoding, ${filename}_x264.mp4 file does exist"
+#
+#else
+#
+#  echo "converting png to h264 and packaging video file"
+#  $ffmpeg -y -loop 1 -t 10 -framerate 5 -i $filename.png -f mp4 -c:v libx264 -crf 0 -pix_fmt yuv420p10 -preset veryslow -movflags faststart ${filename}_yuv420p10_x264.mp4
+#  $ffmpeg -y -loop 1 -t 10 -framerate 5 -i $filename.png -f mp4 -c:v libx264 -crf 0 -pix_fmt yuv444p10 -preset veryslow -movflags faststart ${filename}_yuv444p10_x264.mp4
+#fi
 
 
 
