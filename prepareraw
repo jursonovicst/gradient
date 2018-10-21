@@ -13,8 +13,8 @@ x264="../x264/x264"
 ffmpeg="../ffmpeg/ffmpeg"
 #
 # video size in pixel
-width=3120
-height=1440
+width=1920
+height=1080
 #
 # gradient range in procent (0 to 100)
 gradfrom=$1
@@ -74,8 +74,8 @@ else
             $((140 / $gradbarnum10)) mm on a 6\" phone
 "
 
-  COLORMASK=("#%04x%04xffff" "-" "#%04xffff%04x" "-" "#ffff%04x%04x" "-" "#%04x%04x%04x")
-  COLORNAME=("blue" "-" "green" "-" "red" "-" "gray")
+  COLORMASK=("#%04x00000000" "-" "#0000%04x0000" "-" "#00000000%04x" "-" "#%04x%04x%04x")
+  COLORNAME=("red" "-" "green" "-" "blue" "-" "gray")
 
   for gradnum in $(seq 0 2 5); do
 
@@ -83,17 +83,17 @@ else
     command="convert -depth 16 $filename.png "
     for i in $(seq 0 $(($gradbarnum8 - 1))); do
       color1ch=$((256 * $gradfrom / 100 * 256 + 256 * $i))
-      color=$(printf ${COLORMASK[$gradnum]} $color1ch $color1ch )
+      color=$(printf ${COLORMASK[$gradnum]} $color1ch)
       x1=$(($i * gradbarwidth8))
       y1=$(($gradheight * $gradnum + 3))
       x2=$(($x1 + gradbarwidth8 - 1))
       y2=$(($gradheight * ( $gradnum + 1 ) - 1))
       #echo $color $x1 $y1 $x2 $y2
-      command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
+      command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#ffffff\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
       colorname=$(printf %04x $color1ch)
-      command=$command"-fill \"#000000000000\" -pointsize 10 -annotate +$x1+$(($y1 + 9)) '$colorname' "
+      command=$command"-fill \"#ffffffffffff\" -pointsize 10 -annotate +$x1+$(($y1 + 9)) '$colorname' "
     done
-    command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '8bit ${COLORNAME[$gradnum]} $gradfrom% to $gradto% gradient (you should see $gradbarnum8 vertical bars)' "
+    command=$command"-fill \"#ffffffffffff\" -pointsize 36 -annotate +50+$(($y1 + 110)) '8bit ${COLORNAME[$gradnum]} $gradfrom% to $gradto% gradient (you should see $gradbarnum8 vertical bars)' "
     command=$command"$filename.png"
     eval  $command
 
@@ -101,17 +101,17 @@ else
     command="convert -depth 16 $filename.png "
     for i in $(seq 0 $(($gradbarnum10 - 1))); do
       color1ch=$((256 * $gradfrom / 100 * 256 + 64 * $i))
-      color=$(printf ${COLORMASK[$gradnum]} $color1ch $color1ch )
+      color=$(printf ${COLORMASK[$gradnum]} $color1ch)
       x1=$(($i * gradbarwidth10))
       y1=$(($gradheight * ( $gradnum + 1 ) + 1))
       x2=$(($x1 + gradbarwidth10 - 1))
       y2=$(($gradheight * ( $gradnum + 2 ) - 3))
       #echo $color $x1 $y1 $x2 $y2
-      command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$(($y2 - 10)) $x2,$y2 \" "
+      command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#ffffff\" -draw \"line $x2,$(($y2 - 10)) $x2,$y2 \" "
       colorname=$(printf %04x $color1ch)
-      command=$command"-fill \"#000000000000\" -pointsize 10 -annotate +$x1+$y2 '$colorname' "
+      command=$command"-fill \"#ffffffffffff\" -pointsize 10 -annotate +$x1+$y2 '$colorname' "
     done
-    command=$command"-fill \"#000000000000\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit ${COLORNAME[$gradnum]} gradient (you should see $gradbarnum10 vertical bars, if your display supports 10-bit color depth)' "
+    command=$command"-fill \"#ffffffffffff\" -pointsize 36 -annotate +50+$(($y1 + 110)) '10bit ${COLORNAME[$gradnum]} gradient (you should see $gradbarnum10 vertical bars, if your display supports 10-bit color depth)' "
     command=$command"$filename.png"
     eval  $command
 
@@ -129,7 +129,7 @@ else
     x2=$(($x1 + gradbarwidth8 - 1))
     y2=$(($gradheight * ( $gradnum + 1 ) - 1))
     #echo $color $x1 $y1 $x2 $y2
-    command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
+    command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#ffffff\" -draw \"line $x2,$y1 $x2,$(($y1 + 10))\" "
     colorname=$(printf %04x $color1ch)
     command=$command"-fill \"#000000000000\" -pointsize 10 -annotate +$x1+$(($y1 + 9)) '$colorname' "
   done
@@ -147,7 +147,7 @@ else
     x2=$(($x1 + gradbarwidth10 - 1))
     y2=$(($gradheight * ( $gradnum + 2 ) - 3))
     #echo $color $x1 $y1 $x2 $y2
-    command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#000000\" -draw \"line $x2,$(($y2 - 10)) $x2,$y2 \" "
+    command=$command"-fill \"$color\" -draw \"rectangle $x1,$y1 $x2,$y2\" -fill \"#ffffff\" -draw \"line $x2,$(($y2 - 10)) $x2,$y2 \" "
     colorname=$(printf %04x $color1ch)
     command=$command"-fill \"#000000000000\" -pointsize 10 -annotate +$x1+$y2 '$colorname' "
   done
