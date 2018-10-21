@@ -14,7 +14,7 @@ ffmpeg="../ffmpeg/ffmpeg"
 #
 # video size in pixel
 width=1920
-height=1080
+height=1200
 #
 # gradient range in procent (0 to 100)
 gradfrom=$1
