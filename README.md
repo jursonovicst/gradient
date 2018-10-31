@@ -8,7 +8,7 @@ Simply download the [gradient.mp4](https://github.com/jursonovicst/gradient/blob
 
 # How I made this test sequence
 
-Check the [prepareraw](https://github.com/jursonovicst/gradient/blob/master/prepareraw) script.
+Check the [prepareraw](https://github.com/jursonovicst/gradient/blob/master/prepareraw) script. (On linux, 1. clone repo, in terminal cd into the folder, enter: 'chmod +x prepareraw', enter './prepareraw').
 
 I used ImageMagick to create the following 16-bit, 3840×2160 (UHD) png image with four 256 step and four 1024 step gradients. The 10-bit gradients have very thin bars, so I added an extra gray gradient at the bottom with less steps to produce wider bars.
 
