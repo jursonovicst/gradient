@@ -12,7 +12,7 @@ Check, how many vertical bars you see. If your display supports 10-bit color dep
 
 Check the [prepareraw.sh](prepareraw.sh) script.
 
-I used ImageMagick to create a 16-bit png image with four 256 step and four 1024 step gradients.
+I used ImageMagick to create a 16-bit png image with four gradients according to 8 bit colors values, and four gradients  according to 10 bit color values.
 
 ![gradient](https://raw.githubusercontent.com/jursonovicst/gradient/master/test_sequences/1920x1080/gradient_1920-1080_25-50.png)
 
