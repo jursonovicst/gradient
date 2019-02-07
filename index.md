@@ -2,7 +2,7 @@
 
 tomtom
 
-| Target         | Resolution | Gradient split | color space |
+| Target         | Resolution | Gradient split | Color spaces |
 |----------------|------------|-----------|----------|
 | UHD TV         | 3840x2160  | 0%-100%   | [gbrp10le_x265](test_sequences/3840x2160/gradient_3840-2160_0-100_gbrp10le_x265.mp4), [yuv444p10](test_sequences/3840x2160/gradient_3840-2160_0-100_yuv444p10_x265.mp4), [yuv420p10](test_sequences/3840x2160/gradient_3840-2160_0-100_yuv420p10_x265.mp4) |
 |||||
