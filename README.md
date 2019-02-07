@@ -3,7 +3,7 @@
 
 I had always trouble finding good test sequences for verifying the 10-bit color depth support of new UHD TV sets (and new smartphones), so I just created some. Feel free to use it under cc.
 
-Simply navigate to the [github pages](http://jursonovicst.github.io/gradient/) of this repository, open the linked video files or download the content of the [test sequences](https://github.com/jursonovicst/gradient/tree/master/test_sequences) folder to a pendrive, plug it into your device, and play the video files.
+**Simply navigate to the [github pages](http://jursonovicst.github.io/gradient/) of this repository, open the linked video files or download the content of the [test sequences](https://github.com/jursonovicst/gradient/tree/master/test_sequences) folder to a pendrive, plug it into your device, and play the video files.**
 
 Check, how many vertical bars you see. If your display supports 10-bit color depth, you should see 4 times more stripes in 10 bit gradients, than on the 8 bit gradients. Look closely, they may be only 3 pixel wide (the stripe borders are marked with white lines).
 
