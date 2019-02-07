@@ -14,7 +14,7 @@ Check the [prepareraw.sh](prepareraw.sh) script.
 
 I used ImageMagick to create a 16-bit, png image with four 256 step and four 1024 step gradients. The 10-bit gradients have very thin bars, so I added an extra gray gradient at the bottom with less steps to produce wider bars.
 
-![gradient](https://raw.githubusercontent.com/jursonovicst/gradient/master/test_sequences/3840x2160/gradient_3840-2160_0-100.png)
+![gradient](https://raw.githubusercontent.com/jursonovicst/gradient/master/test_sequences/1920x1080/gradient_1920-1080_0-25.png)
 
 (if you view this image on your computer, your display probably will not show a difference due to the lack of 10-bit color depth support...)
 
