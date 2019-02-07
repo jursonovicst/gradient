@@ -8,7 +8,7 @@ Simply navigate to the [github pages](http://jursonovicst.github.io/gradient/) o
 Check, how many vertical bars you see. If your display supports 10-bit color depth, you should see 4 times more stripes in 10 bit gradients, than on the 8 bit gradients. Look closely, they may be only 3 pixel wide (the stripe borders are marked with white lines).
 
 
-# How I made this test sequence
+# How I made these sequences?
 
 Check the [prepareraw.sh](prepareraw.sh) script.
 
