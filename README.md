@@ -16,7 +16,7 @@ I used ImageMagick to create a 16-bit png image with four 256 step and four 1024
 
 ![gradient](https://raw.githubusercontent.com/jursonovicst/gradient/master/test_sequences/1920x1080/gradient_1920-1080_25-50.png)
 
-(if you view this image on your computer, your display probably will not show a difference due to the lack of 10-bit color depth support...)
+(if you view this image on your computer, your display may not show a difference due to the lack of 10-bit color depth support...)
 
 Looping and encoding this png file with ffmpeg, using the x265 encoder with resulted mp4 video files, which you can play on the target device.
 
