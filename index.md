@@ -1,6 +1,8 @@
 # 10 bit test sequences
 
-For the best quality, try first the video files with **gbrp10le** color space, which encodes the gradient with native RGB colors. Unfortunately, not all devices support them, so in case of a playback issue, fall back to **yuv444p10**, or to **yuv420p10** (which may reduces the horizontal spatial resolution).
+For the best quality, try first the video files with **gbrp10le** color space (which encodes the gradient with native RGB colors).
+
+Unfortunately, not all devices support them, so in case of a playback issue, fall back to **yuv444p10**, or to **yuv420p10** (which may reduces the horizontal spatial resolution).
 
 For smaller resoutions, the gradients are splitted into multiple parts to allow wider stripes and easier indentification.
 
