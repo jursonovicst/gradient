@@ -22,8 +22,8 @@ Looping and encoding this png file with ffmpeg, using the x265 encoder with resu
 
 During encoding, I used the following settings:
 
- - 5 fps to limit the size of the video files
- - lossless encoding to allow exact color comparison
- - full color range to have proper color steps at both ends of the gradient.
+ - 5 fps to limit the size of the video files,
+ - lossless encoding to allow exact color comparison,
+ - full color range to have proper color steps at both ends of the gradient,
  - gbrp10le color space for native RGB color encoding, but yuv444p10 and yuv420p10 are also provided for better compatibility.
  
