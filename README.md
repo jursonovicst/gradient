@@ -1,9 +1,11 @@
 # Gradient
 10-BIT DISPLAY TEST SEQUENCE
 
-I had always trouble finding good test sequences for verifying the 10-bit color depth support of new UHD TV sets, so I just created one. Feel free to use it under cc.
+I had always trouble finding good test sequences for verifying the 10-bit color depth support of new UHD TV sets (and new smartphones), so I just created some. Feel free to use it under cc.
 
-Simply download the [gradient.mp4](https://github.com/jursonovicst/gradient/blob/master/gradient.mp4?raw=true "with h265 codec") (or the [gradient_x264.mp4](https://github.com/jursonovicst/gradient/blob/master/gradient_x264.mp4?raw=true "with h264 codec")) mp4 file to an USB drive, plug it into your TV, play the video, and check, how many vertical bars you see. If your display supports 10-bit color depth, you should see 1024 different stripes. Look closely, they are only 3 pixel wide (the stripe borders are marked with black lines).
+Simply navigate to the [github pages](http://jursonovicst.github.io/gradient/) of this repository, and open the linked video files, or download the content of the [test sequences](https://github.com/jursonovicst/gradient/tree/master/test_sequences) folder to a pendrive, and open the files on your device.
+
+Check, how many vertical bars you see. If your display supports 10-bit color depth, you should see 4 times more stripes in 10 bit gradients, than on the 8 bit gradients. Look closely, they may be only 3 pixel wide (the stripe borders are marked with white lines).
 
 
 # How I made this test sequence
