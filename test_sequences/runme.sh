@@ -3,6 +3,8 @@
 cd 3840x2160
 rm -f *
 ../../prepareraw.sh 3840 2160 0 100
+../../prepareraw.sh 3840 2160 0 50
+../../prepareraw.sh 3840 2160 50 100
 cd ..
 
 cd 3120x1440
